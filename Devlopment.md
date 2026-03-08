@@ -453,3 +453,37 @@ SCJP information
 ```output
 Other course information
 ```
+## JAR vs WAR vs EAR
+
+**JAR (Java Archive)**
+
+A JAR file contains a group of .class files and related resources
+
+**WAR (Web Archive)**
+
+ A WAR file represents a web application. It contains:
+- Servlets
+- JSPs (Java Server Pages)
+- HTML files
+- CSS files
+- JavaScript
+- Web configuration files (web.xml)
+
+Main advantages of maintaining a web application as a WAR file:
+- Easy project deployment
+- Easy project delivery
+- Easy project transportation
+
+
+**EAR (Enterprise Archive)**
+
+An EAR file represents an enterprise application. It may contain:
+- WAR files
+- JAR files
+- EJB modules
+- JMS components
+- Configuration files
+
+> **NOTE:** In general, an EAR file represents a collection of WAR files and JAR files used to build a large enterprise-level application
+
+## Web Application Vs Enterprise Application
