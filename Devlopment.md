@@ -252,3 +252,146 @@ Hello Kareena, can I help you?
 - If any location is created because of a package statement, that location should be resolved by using an import statement, and the base package location must be included in the classpath.
 - The compiler checks only one-level dependency, whereas the JVM checks all levels of dependencies during runtime.
 - In the classpath, the order of locations is important, and the JVM always searches from left to right until the required match is found.
+
+## JAR files
+
+All third-party software plugins are usually available in the form of JAR files.
+
+Example :
+- To develop a Servlet, all dependent classes are available in `servlet-api.jar`.  
+We must place this JAR file in the classpath to compile a servlet program.
+- To run a JDBC program, all required classes are available in `ojdbc14.jar`.  
+To run a JDBC program, we must place this JAR file in the classpath.
+
+### Various JAR Command-Line Operations
+
+1. To Create a JAR File (Zip File)
+```bash
+jar -cvf durgaclass.jar Test.class
+jar -cvf durgaclass.jar A.class B.class C.class
+jar -cvf durgaclass.jar *.class
+jar -cvf durgaclass.jar *.*
+```
+Options:
+- `c` → create a new JAR file
+- `v` → verbose (display progress)
+- `f` → specify the JAR file name
+
+2. To Extract a JAR File (Unzip File)
+
+```bash
+jar -xvf durgaclass.jar
+```
+Options:
+- `x` → extract files
+- `v` → verbose output
+- `f` → specify the JAR file
+
+3. To Display the Table of Contents of a JAR File
+
+```bash
+jar -tvf durgaclass.jar
+```
+Options:
+- `t` → display table of contents
+- `v` → verbose output
+- `f` → specify the JAR file
+
+> **NOTE:** A JAR (Java Archive) file is used to package multiple `.class` files and resources into a single compressed file.
+
+
+Example
+
+**Service Provider Role**
+```java
+public class DurgaColorfulCode {
+
+    public static void add(int x, int y) {
+        System.out.println(x + y);
+    }
+
+    public static void multiply(int x, int y) {
+        System.out.println(2 * x * y);
+    }
+}
+```
+compile
+```bash
+javac DurgaColorfulCode.java
+```
+Create JAR File
+```bash
+jar -cvf durgacode.jar DurgaColorfulCode.class
+```
+**Client's Role**
+
+The client downloads the JAR file and places it in D:\ of the client's machine.
+```java
+class Bahara {
+    public static void main(String[] args) {
+        DurgaColorfulCode.add(10, 20);
+        DurgaColorfulCode.multiply(10, 20);
+    }
+}
+```
+Compilation
+- ❌ Invalid
+```bash
+C:\durga_class> javac Bahara.java
+```
+**Reason**:  
+The compiler cannot find DurgaColorfulCode class.
+
+- ❌ Invalid
+```bash
+C:\durga_class> javac -cp D:\ Bahara.java
+```
+**Reason:**  
+Only the directory is specified, but the JAR file name is not included.
+
+- ✅ Valid
+```bash
+C:\durga_class> javac -cp D:\durgacode.jar Bahara.java
+```
+**Runtime**
+
+❌ Invalid
+```bash
+C:\durga_class> java Bahara
+```
+❌ Invalid
+```bash
+C:\durga_class> java -cp D:\ Bahara
+```
+❌ Invalid
+```bash
+C:\durga_class> java -cp .;D:\ Bahara
+```
+✅ Valid
+```bash
+C:\durga_class> java -cp .;D:\durgacode.jar Bahara
+```
+> **NOTE:**
+> - To place a .class file in the classpath, only the directory location is enough.
+> - But to place a JAR file in the classpath, the location alone is not enough; we must specify the JAR file name as well.
+
+### short-cut way to place JAR file in classpath
+
+If we place a JAR file in the following location, then all the classes and interfaces present in that JAR file become automatically available to the Java compiler and JVM. We do not need to set the classpath explicitly.
+
+Directory Structure
+```digram
+jdk
+└── jre
+    └── lib
+        └── ext
+            └── *.jar
+```
+Explanation:
+
+- The ext directory is known as the extension directory.
+
+- Any JAR file placed in this directory is automatically included in the Java environment.
+
+- Therefore, the Java compiler and JVM can access those classes without explicitly setting the classpath.
+
