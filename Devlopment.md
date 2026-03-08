@@ -395,3 +395,61 @@ Explanation:
 
 - Therefore, the Java compiler and JVM can access those classes without explicitly setting the classpath.
 
+## System Properties
+
+For every system, some persistent information is maintained in the form of system properties. 
+
+These include information such as:
+- Name of the operating system
+- Java version
+- JVM vendor
+- User country, etc.
+
+**Demo Program to Print System Properties**
+```java
+import java.util.Properties;
+
+class Test {
+    public static void main(String[] args) {
+        Properties p = System.getProperties();
+        p.list(System.out);
+    }
+}
+```
+This program prints all system properties available in the JVM.  
+
+### Setting System Properties
+
+We can set system properties explicitly from the command prompt using the `-D` option.
+```bash
+java -Ddurga=ocjp Test
+```
+Explanation:
+- `-D` → Used to set a system property
+- `durga` → Property name
+- `ocjp` → Property value
+
+The main advantage of setting system properties is that we can customize the behavior of a Java program without changing the source code.
+
+```java
+class Test {
+    public static void main(String[] args) {
+        String course = System.getProperty("course");
+
+        if (course.equals("scjp")) {
+            System.out.println("SCJP information");
+        } else {
+            System.out.println("Other course information");
+        }
+    }
+}
+```
+Output
+- `java -Dcourse=scjp Test`
+```output
+SCJP information
+```
+- `java -Dcourse=scwcd Test`
+```output
+Other course information
+```
