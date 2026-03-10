@@ -362,3 +362,137 @@ Output
 [A, 10, null]
 [A, 10, M, null, N]
 ```
+
+- Usually, we use collections to hold and transfer objects from one location to another location (like a container).
+- To support this requirement, every collection class by default implements the `Serializable` and `Cloneable` interfaces.
+- ArrayList and Vector classes implement the RandomAccess interface, so that any random element can be accessed with the same speed.
+
+## RandomAccess
+
+- RandomAccess is an interface present in the java.util package.
+- It does not contain any methods.
+- It is a marker interface, where the required ability is provided automatically by the JVM.
+
+Example:
+
+```java
+import java.util.*;
+
+class Test {
+    public static void main(String[] args) {
+
+        ArrayList l1 = new ArrayList();
+        LinkedList l2 = new LinkedList();
+
+        System.out.println(l1 instanceof Serializable);
+        System.out.println(l2 instanceof Cloneable);
+        System.out.println(l1 instanceof RandomAccess);
+        System.out.println(l2 instanceof RandomAccess);
+    }
+}
+```
+Output
+```output
+true
+true
+true
+false
+```
+
+- ArrayList is the best choice if our frequent operation is retrieval, because ArrayList implements the `RandomAccess` interface, which allows fast index-based access.
+- ArrayList is the worst choice if our frequent operation is insertion or deletion in the middle, because in such cases elements must be shifted, which reduces performance.
+
+## Difference Between ArrayList and Vector
+
+| ArrayList                                                                                                           | Vector                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Every method present in **ArrayList** is **non-synchronized**.                                                      | Every method present in **Vector** is **synchronized**.                                                   |
+| At a time, **multiple threads are allowed** to operate on an ArrayList object, and hence it is **not thread-safe**. | At a time, **only one thread is allowed** to operate on a Vector object, and hence it is **thread-safe**. |
+| **Performance is relatively high** because threads are **not required to wait** to operate on an ArrayList object.  | **Performance is relatively low** because threads are **required to wait** to operate on a Vector object. |
+| Introduced in **Java 1.2** and it is **not a legacy class**.                                                        | Introduced in **Java 1.0** and it is a **legacy class**.                                                  |
+
+## How to Get a Synchronized Version of an ArrayList Object
+
+- By default, ArrayList is non-synchronized.
+- But we can get a synchronized version of an ArrayList object by using the synchronizedList() method of the Collections class.
+
+`public static List synchronizedList(List l)`
+
+Example :
+```java
+import java.util.*;
+
+class Test {
+    public static void main(String[] args) {
+
+        ArrayList l = new ArrayList();
+        List l1 = Collections.synchronizedList(l);
+
+    }
+}
+```
+Similarly, we can get synchronized versions of `Set` and `Map` objects by using the following methods of the `Collections` class.
+
+```java
+public static Set synchronizedSet(Set s)
+public static Map synchronizedMap(Map m)
+```
+
+# LinkedList
+
+- The underlying data structure is a doubly linked list.
+- Insertion order is preserved.
+- Duplicate objects are allowed.
+- Heterogeneous objects are allowed.
+- Null insertion is possible.
+- LinkedList implements the Serializable and Cloneable interfaces, but not the RandomAccess interface.
+- LinkedList is the best choice if our frequent operation is insertion or deletion in the middle.
+- LinkedList is the worst choice if our frequent operation is retrieval.
+
+## Constructors
+
+1. `LinkedList l = new LinkedList();`  
+Creates an empty LinkedList object.
+1. `LinkedList l = new LinkedList(Collection c);`  
+Creates an equivalent LinkedList object for the given collection.
+
+## LinkedList Class Specific Methods
+
+Usually, we can use LinkedList to develop Stacks and Queues.  
+To support this requirement, the LinkedList class defines the following specific methods.
+
+| Method                    | Description                                                     |
+| ------------------------- | --------------------------------------------------------------- |
+| `void addFirst(Object o)` | Inserts the specified element at the **beginning** of the list. |
+| `void addLast(Object o)`  | Inserts the specified element at the **end** of the list.       |
+| `Object getFirst()`       | Returns the **first element** of the list.                      |
+| `Object getLast()`        | Returns the **last element** of the list.                       |
+| `Object removeFirst()`    | Removes and returns the **first element** of the list.          |
+| `Object removeLast()`     | Removes and returns the **last element** of the list.           |
+
+Example :
+```java
+import java.util.*;
+
+class LinkedListDemo {
+    public static void main(String[] args) {
+
+        LinkedList l = new LinkedList();
+
+        l.add("durga");
+        l.add(30);
+        l.add(null);
+        l.add("durga");
+
+        l.set(0, "Software");
+        l.add(0, "venky");
+        l.removeLast();
+        l.addFirst("CCC");
+
+        System.out.println(l);
+    }
+}
+```
+```output
+[CCC, venky, Software, 30, null]
+```
