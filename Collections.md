@@ -57,7 +57,9 @@ As programmers, we are responsible for using the provided methods, but we are no
 | Arrays can hold **only homogeneous data type elements** (same type).                                                                                                                                                         | Collections can hold **both homogeneous and heterogeneous elements**.                                                                                                                                                                    |
 | There is **no underlying data structure for arrays**, and hence **ready-made method support is not available**. For every requirement, we must write the code explicitly, which **increases the complexity of programming**. | Every collection class is implemented based on **a specific data structure**, and hence **ready-made method support is available**. As programmers, we can directly use these methods and are **not responsible for implementing them**. |
 | Arrays can hold **both primitive types and objects**.                                                                                                                                                                        | Collections can hold **only objects**, not primitive data types (they use wrapper classes instead).                                                                                                                                      |
+
 # Collection
+
 
 If we want to represent a group of individual objects as a single entity, then we should go for a Collection.
 
@@ -78,9 +80,9 @@ The Collection Framework contains several classes and interfaces that can be use
 1. [SortedSet](#sortedset-i)
 1. [NavigableSet](#navigableset-i)
 1. [Queue](#queue-i)
-1. Map
-1. SortedMap
-1. NavigableMap
+1. [Map](#map-i)
+1. [SortedMap](#sortedmap-i)
+1. [NavigableMap](#navigablemap-i)
 
 ### Collection (I)
 
@@ -261,3 +263,102 @@ Map (Interface)                         [1.2 version]
 
 [Image](https://tinyurl.com/wsyrn43x)
 
+# Collection (I)
+
+- If we want to represent a group of individual objects as a single entity, then we should go for a Collection.
+
+- The Collection interface defines the most common methods that are applicable to any collection object.
+
+| **Method**                          | **Definition**                                                                               |
+| ----------------------------------- | -------------------------------------------------------------------------------------------- |
+| `boolean add(Object o)`             | Adds the specified element to the collection.                                                |
+| `boolean addAll(Collection c)`      | Adds all elements of the specified collection to this collection.                            |
+| `boolean remove(Object o)`          | Removes the specified element from the collection.                                           |
+| `boolean removeAll(Collection c)`   | Removes all elements from this collection that are also present in the specified collection. |
+| `boolean retainAll(Collection c)`   | Retains only the elements that are also present in the specified collection.                 |
+| `void clear()`                      | Removes all elements from the collection.                                                    |
+| `boolean contains(Object o)`        | Returns `true` if the collection contains the specified element.                             |
+| `boolean containsAll(Collection c)` | Returns `true` if this collection contains all elements of the specified collection.         |
+| `boolean isEmpty()`                 | Returns `true` if the collection contains no elements.                                       |
+| `int size()`                        | Returns the number of elements present in the collection.                                    |
+| `Object[] toArray()`                | Converts the collection into an array.                                                       |
+| `Iterator iterator()`               | Returns an **Iterator object** to traverse the elements of the collection.                   |
+
+
+> **NOTE:** There is no concrete class that implements the Collection interface directly.
+
+# List (I)
+
+- List is a child interface of the Collection interface.
+- If we want to represent a group of individual objects as a single entity where duplicates are allowed and insertion order must be preserved, then we should go for a List.
+- In a List, insertion order is preserved using an index, and we can differentiate duplicate objects using the index. Hence, the index plays a very important role in List.
+-  The List interface defines the following specific methods.
+
+| **Method**                                 | **Definition**                                                                       |
+| ------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `void add(int index, Object o)`            | Inserts the specified element at the specified position in the list.                 |
+| `boolean addAll(int index, Collection c)`  | Inserts all elements of the specified collection starting at the specified position. |
+| `Object get(int index)`                    | Returns the element present at the specified index.                                  |
+| `Object remove(int index)`                 | Removes and returns the element at the specified index.                              |
+| `Object set(int index, Object newElement)` | Replaces the element at the specified index with the new element.                    |
+| `int indexOf(Object o)`                    | Returns the index of the first occurrence of the specified element.                  |
+| `int lastIndexOf(Object o)`                | Returns the index of the last occurrence of the specified element.                   |
+| `ListIterator listIterator()`              | Returns a **ListIterator** to traverse the list elements.                            |
+
+# ArrayList
+
+- The underlying data structure of an ArrayList is a resizable (or growable) array.
+- Duplicate objects are allowed.
+- Insertion order is preserved.
+- Heterogeneous objects are allowed (except in TreeSet and TreeMap, where heterogeneous objects are not allowed because sorting is required)
+- Null insertion is possible (multiple null values can be stored).
+
+## Constructors
+
+1. `ArrayList l = new ArrayList();`
+
+Creates an empty ArrayList object with the default initial capacity of 10.
+
+Once the ArrayList reaches its maximum capacity, a new ArrayList object will be created with increased capacity.  
+ `newCapacity = (currentCapacity * 3 / 2) + 1 `
+
+2. `ArrayList l = new ArrayList(int initialCapacity);`  
+
+Creates an empty ArrayList object with the specified initial capacity.
+
+3. `ArrayList l = new ArrayList(Collection c);`  
+
+Creates an equivalent ArrayList object for the given Collection.
+
+Example :
+```java
+import java.util.*;
+
+class ArrayListDemo {
+    public static void main(String[] args) {
+
+        ArrayList l = new ArrayList();
+
+        l.add("A");
+        l.add(10);
+        l.add("A");
+        l.add(null);
+
+        System.out.println(l);
+
+        l.remove(2);
+        System.out.println(l);
+
+        l.add(2, "M");
+        l.add("N");
+
+        System.out.println(l);
+    }
+}
+```
+Output
+```output
+[A, 10, A, null]
+[A, 10, null]
+[A, 10, M, null, N]
+```
