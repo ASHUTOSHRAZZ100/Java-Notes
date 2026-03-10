@@ -93,23 +93,23 @@ The Collection Framework contains several classes and interfaces that can be use
 However, there is no concrete class that implements the Collection interface directly. Instead, other interfaces such as List, Set, and Queue extend the Collection interface, and their classes provide implementations.
 
 ```diagram
-Collection (Interface)    [1.2 version]
+Collection (Interface)                  [1.2 version]
    |
-   |-- List               [1.2 version]
-   |     |-- ArrayList    [1.2 version]
-   |     |-- LinkedList   [1.2 version]
-   |     |-- Vector       [1.0 version]
-   |            |-- Stack [1.0 version]
+   |-- List                             [1.2 version]
+   |     |-- ArrayList                  [1.2 version]
+   |     |-- LinkedList                 [1.2 version]
+   |     |-- Vector                     [1.0 version]
+   |            |-- Stack               [1.0 version]
    |
-   |-- Set                [1.2 version]
-   |     |-- HashSet      [1.2 version]
-   |     |      |-- LinkedHashSet   [1.4 version]
+   |-- Set                              [1.2 version]
+   |     |-- HashSet                    [1.2 version]
+   |     |      |-- LinkedHashSet       [1.4 version]
    |     |
-   |     |-- SortedSet    [1.2 version]
-   |            |-- NavigableSet   [1.6 version]
-   |                    |-- TreeSet [1.2 version]
+   |     |-- SortedSet                  [1.2 version]
+   |            |-- NavigableSet        [1.6 version]
+   |                    |-- TreeSet     [1.2 version]
    |
-   |-- Queue             [1.5 version]
+   |-- Queue                            [1.5 version]
          |-- PriorityQueue
          |-- BlockingQueue
 ```
@@ -217,21 +217,26 @@ Queue [1.5 version]
 - Duplicate keys are not allowed, but values can be duplicated.
 
 ```diagram
-Map (Interface)        [1.2 version]
+Map (Interface)                         [1.2 version]
    |
-   |-- HashMap         [1.2 version]
-   |      |-- LinkedHashMap   [1.4 version]
+   |-- HashMap (Interface)              [1.2 version]
+   |      |-- LinkedHashMap             [1.4 version]
    |
-   |-- WeakHashMap     [1.2 version]
+   |-- WeakHashMap (Interface)          [1.2 version]
    |
-   |-- IdentityHashMap [1.4 version]
+   |-- IdentityHashMap (Interface)      [1.4 version]
    |
-   |-- Dictionary (Abstract Class)  [1.0 version]
-            |-- Hashtable       [1.0 version]
-                   |-- Properties      [1.0 version]
+   |-- SortedMap (Interface)            [1.2 version]
+   |      |-- NavigableMap (Interface)  [1.6 version]
+   |             |-- TreeMap            [1.2 version]
+   |
+   |-- Dictionary (Abstract Class)      [1.0 version]
+          |
+          |-- Hashtable                 [1.0 version]
+                 |-- Properties         [1.0 version]
 ```
 
-###  Sortedmap (I)
+###  SortedMap (I)
 
 - SortedMap is a child interface of the Map interface.
 
@@ -240,3 +245,19 @@ Map (Interface)        [1.2 version]
 - In SortedMap, the sorting is based on keys only, not on values.
 
 #### NavigableMap (I)
+
+- NavigableMap is a child interface of the SortedMap interface.
+
+- It defines several methods for navigation purposes.
+
+
+> **Note:** The following are legacy components present in the Java Collection Framework:
+> - Enumeration (Interface)
+> - Dictionary (Abstract Class)
+> - Vector (Class)
+> - Stack (Class)
+> - Hashtable (Class)
+> - Properties (Class)
+
+[Image](https://tinyurl.com/wsyrn43x)
+
