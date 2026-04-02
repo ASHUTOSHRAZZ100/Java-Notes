@@ -496,3 +496,83 @@ class LinkedListDemo {
 ```output
 [CCC, venky, Software, 30, null]
 ```
+
+## Difference Between ArrayList and LinkedList
+
+
+| **ArrayList**                                                                                                                                     | **LinkedList**                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ArrayList is the best choice if our frequent operation is retrieval**, because it provides **fast index-based access**.                         | **LinkedList is the best choice if our frequent operation is insertion or deletion in the middle**.                                                |
+| **ArrayList is the worst choice for frequent insertion or deletion in the middle**, because internally **several shift operations are required**. | **LinkedList is the worst choice if our frequent operation is retrieval**, because elements must be accessed by **traversing nodes**.              |
+| In **ArrayList**, elements are stored in **consecutive memory locations**, and hence **retrieval operations become easy and fast**.               | In **LinkedList**, elements are **not stored in consecutive memory locations**, and hence **retrieval operations become slower and more complex**. |
+
+
+# Vector
+
+- the underline datastructure is resizable array or Grovable array
+- Insertion order is preserved
+- duplicates are allowed
+- hetrogeneous object are allowed
+- null inseration is possible
+- it implements serilizable , clonable, and  random access interafaces
+- every method present in the vector is thread syncorinized and hence vector object is thread safe.
+
+## Constructors
+
+1. `Vector v = new Vector();`  
+Creates an empty Vector object with the default initial capacity of 10.  
+Once the Vector reaches its maximum capacity, a new Vector object will be created with: `new capacity = current capacity * 2`
+
+1. `Vector v = new Vector(int initialCapacity);`  
+Creates an empty Vector object with the specified initial capacity.
+
+1. `Vector v = new Vector(int initialCapacity, int capacityIncrement);`  
+Creates an empty Vector object with the specified initial capacity, and the capacity will increase by the specified increment value whenever the Vector reaches its maximum capacity 
+
+1. `Vector v = new Vector(Collection c);`  
+Creates an equivalent Vector object for the given Collection.
+This constructor is mainly used for interconversion between Collection objects.
+
+## Vector Specific Methods
+
+| **Method**                    | **Defined In / Description**                                          |
+| ----------------------------- | --------------------------------------------------------------------- |
+| `add(Object o)`               | Defined in **Collection** – Adds an element to the collection.        |
+| `add(int index, Object o)`    | Defined in **List** – Inserts an element at the specified index.      |
+| `addElement(Object o)`        | **Vector specific** – Adds an element to the end of the Vector.       |
+| `remove(Object o)`            | Defined in **Collection** – Removes the specified element.            |
+| `removeElement(Object o)`     | **Vector specific** – Removes the specified element from the Vector.  |
+| `remove(int index)`           | Defined in **List** – Removes the element at the specified index.     |
+| `removeAllElements()`         | **Vector specific** – Removes all elements from the Vector.           |
+| `removeElementAt(int index)`  | **Vector specific** – Removes the element at the specified index.     |
+| `clear()`                     | Defined in **Collection** – Removes all elements from the collection. |
+| `Object get(int index)`       | Defined in **List** – Returns the element at the specified index.     |
+| `Object elementAt(int index)` | **Vector specific** – Returns the element at the specified index.     |
+| `Object firstElement()`       | **Vector specific** – Returns the first element of the Vector.        |
+| `Object lastElement()`        | **Vector specific** – Returns the last element of the Vector.         |
+| `int size()`                  | Returns the **number of elements present** in the Vector.             |
+| `int capacity()`              | Returns the **current capacity** of the Vector.                       |
+| `Enumeration elements()`      | Returns an **Enumeration object to iterate through Vector elements**. |
+
+- Vector contains two types of methods:
+
+   - Collection/List methods → `add()`, `remove()`, `clear()`, `get()`
+   - Vector specific methods → `addElement()`, `removeElement()`, `elementAt()`, `capacity()`, `elements()`
+
+```java
+import java.util.*;
+
+class VectorDemo1{
+    public static void main(String[] args){
+        Vector v = new Vector(10);
+        System.out.println(v.capacity());
+        for(int i=1;i<=10;i++){
+            v.addElement(i);
+                  }
+                  System.out.println(v.capacity());
+                  v.addElement("A");
+                  System.out.println(v.capacity());
+                  System.out.println(v);
+    }
+}
+```
