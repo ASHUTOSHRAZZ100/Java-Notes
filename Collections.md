@@ -576,3 +576,117 @@ class VectorDemo1{
     }
 }
 ```
+
+# Stack
+
+- Stack is a child class of Vector.
+- It is a specially designed class for Last-In-First-Out (LIFO) order.  
+LIFO means the last element inserted will be the first element removed.
+
+## Constructor
+
+`Stack s = new Stack();`
+
+## Methods
+
+| Method                  | Description                                                        |
+| ----------------------- | ------------------------------------------------------------------ |
+| `Object push(Object o)` | Inserts an element onto the stack.                                 |
+| `Object pop()`          | Removes and returns the **top element** of the stack.              |
+| `Object peek()`         | Returns the **top element without removing it**.                   |
+| `boolean empty()`       | Checks whether the stack is **empty or not**.                      |
+| `int search(Object o)`  | Returns the **position of the element from the top of the stack**. |
+
+Example :
+
+```java
+import java.util.*;
+
+class StackDemo {
+    public static void main(String[] args) {
+
+        Stack s = new Stack();
+
+        s.push("A");
+        s.push("B");
+        s.push("C");
+
+        System.out.println(s);
+        System.out.println(s.search("A"));
+        System.out.println(s.search("Z"));
+    }
+}
+```
+Output
+```output
+[A, B, C]
+3
+-1
+```
+
+# The 3 Cursors of Java
+
+If we want to retrieve objects one by one from a collection, then we should go for a cursor.  
+
+A cursor is used to iterate or traverse through the elements of a collection object.
+
+There are three types of cursors available in Java:
+
+1. Enumeration
+2. Iterator
+3. ListIterator
+
+# Enumeration
+
+- We can use Enumeration to get objects one by one from legacy collection objects such as Vector and Hashtable.
+
+- We can create an Enumeration object by using the elements() method of the Vector class. `public Enumeration elements();`
+
+Example :  
+`Enumeration e = v.elements();`
+
+## Methods
+
+| Method                             | Description                                    |
+| ---------------------------------- | ---------------------------------------------- |
+| `public boolean hasMoreElements()` | Returns `true` if more elements are available. |
+| `public Object nextElement()`      | Returns the next element in the collection.    |
+
+
+Example :
+```java
+import java.util.*;
+
+class EnumerationDemo {
+    public static void main(String[] args) {
+
+        Vector v = new Vector();
+
+        for(int i = 0; i <= 10; i++) {
+            v.addElement(i);
+        }
+
+        System.out.println(v);
+
+        Enumeration e = v.elements();
+
+        while(e.hasMoreElements()) {
+            Integer I = (Integer) e.nextElement();
+
+            if(I % 2 == 0) {
+                System.out.println(I);
+            }
+        }
+    }
+}
+```
+Output :
+```output
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+0
+2
+4
+6
+8
+10
+```
