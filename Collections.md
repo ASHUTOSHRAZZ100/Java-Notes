@@ -697,7 +697,7 @@ Output :
 - By using Enumeration, we get only read access to the elements; we cannot perform the remove operation.
 - To overcome these limitations, we should go for the **Iterator cursor**.
 
-# Iterator
+# Iterator (I)
 
 - We can apply the Iterator concept to any Collection object, and hence it is a universal cursor.
 - By using Iterator, we can perform both read and remove operations
@@ -772,5 +772,95 @@ Hence, they are single-direction cursors, not bi-directional cursors.
 We cannot perform replacement or addition of new objects.
 - To overcome the above limitations, we should go for ListIterator.
 
+# ListIterator (I)
 
+- By using ListIterator, we can move either in the forward direction or backward direction, and hence it is a bi-directional cursor.
+- By using ListIterator, we can perform replacement and addition of new objects, in addition to read and remove operations.
+- We can create a ListIterator object by using the `listIterator()` method of the List interface.  
+`public ListIterator listIterator();`
 
+- ListIterator is the child interface of Iterator, and hence all methods present in Iterator are automatically available to ListIterator.
+```diagram
+
+Iterator (I)
+     ^
+     |
+ListIterator (I)
+```
+- ListIterator defines the following nine methods.
+
+Example :
+
+```java
+// l is any List object
+ListIterator ltr = l.listIterator();
+```
+## Methods
+
+| Method                         | Description                                              |
+| ------------------------------ | -------------------------------------------------------- |
+| `public boolean hasNext()`     | Returns `true` if the next element is available.         |
+| `public Object next()`         | Returns the next element in the list.                    |
+| `public int nextIndex()`       | Returns the index of the next element.                   |
+| `public boolean hasPrevious()` | Returns `true` if the previous element is available.     |
+| `public Object previous()`     | Returns the previous element in the list.                |
+| `public int previousIndex()`   | Returns the index of the previous element.               |
+| `public void remove()`         | Removes the current element from the list.               |
+| `public void add(Object o)`    | Adds a new element into the list.                        |
+| `public void set(Object o)`    | Replaces the current element with the specified element. |
+
+Example :
+
+```java
+import java.util.*;
+
+class ListIteratorDemo {
+    public static void main(String[] args) {
+
+        LinkedList l = new LinkedList();
+
+        l.add("Raj");
+        l.add("Kumar");
+        l.add("Rani");
+        l.add("Kumari");
+
+        System.out.println(l);
+
+        ListIterator itr = l.listIterator();
+
+        while(itr.hasNext()) {
+            String s = (String) itr.next();
+
+            if(s.equals("Kumar")) {
+                itr.remove();
+            }
+            else if(s.equals("Kumari")) {
+                itr.add("Ankita");
+            }
+            else if(s.equals("Raj")) {
+                itr.set("Ashutosh");
+            }
+        }
+
+        System.out.println(l);
+    }
+}
+```
+Output :
+```output
+[Raj, Kumar, Rani, Kumari]
+[Ashutosh, Rani, Kumari, Ankita]
+```
+
+> **Note**: The most powerful cursor is `ListIterator`, but its limitation is that it is applicable only for `List` objects (such as `ArrayList`, `LinkedList`, and `Vector`)
+
+# Comparison of Three Cursors in Java
+
+| **Property**             | **Enumeration**                                     | **Iterator**                                             | **ListIterator**                                                                                                     |
+| ------------------------ | --------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Where we can apply**   | Only for **legacy classes** (`Vector`, `Hashtable`) | For **any Collection object**                            | Only for **List objects** (`ArrayList`, `LinkedList`, `Vector`)                                                      |
+| **Is it legacy?**        | Yes (**1.0 version**)                               | No (**1.2 version**)                                     | No (**1.2 version**)                                                                                                 |
+| **Movement**             | **Single direction** (only forward)                 | **Single direction** (only forward)                      | **Bi-directional** (forward and backward)                                                                            |
+| **Operations supported** | **Read only**                                       | **Read + Remove**                                        | **Read + Remove + Replace + Add**                                                                                    |
+| **How we can get it?**   | By using `elements()` method of **Vector class**    | By using `iterator()` method of **Collection interface** | By using `listIterator()` method of **List interface**                                                               |
+| **Methods**              | `hasMoreElements()`, `nextElement()`                | `hasNext()`, `next()`, `remove()`                        | `hasNext()`, `next()`, `nextIndex()`, `hasPrevious()`, `previous()`, `previousIndex()`, `remove()`, `add()`, `set()` |
