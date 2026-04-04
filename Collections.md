@@ -632,8 +632,8 @@ A cursor is used to iterate or traverse through the elements of a collection obj
 
 There are three types of cursors available in Java:
 
-1. Enumeration
-2. Iterator
+1. [Enumeration](#enumeration)
+2. [Iterator](#iterator)
 3. ListIterator
 
 # Enumeration
@@ -690,3 +690,87 @@ Output :
 8
 10
 ```
+
+## Limitations of Enumeration
+
+- We can apply Enumeration only for legacy classes (like Vector and Hashtable), so it is not a universal cursor.
+- By using Enumeration, we get only read access to the elements; we cannot perform the remove operation.
+- To overcome these limitations, we should go for the **Iterator cursor**.
+
+# Iterator
+
+- We can apply the Iterator concept to any Collection object, and hence it is a universal cursor.
+- By using Iterator, we can perform both read and remove operations
+- We can create an Iterator object by using the iterator() method of the Collection interface.  
+  `public Iterator iterator();`
+
+Example:
+```java
+// c is any Collection object
+Iterator itr = c.iterator();
+```
+## Methods
+
+| Method                     | Description                                      |
+| -------------------------- | ------------------------------------------------ |
+| `public boolean hasNext()` | Returns `true` if the next element is available. |
+| `public Object next()`     | Returns the next element in the collection.      |
+| `public void remove()`     | Removes the current element from the collection. |
+
+
+
+Example :
+
+```java
+import java.util.*;
+
+class IteratorDemo {
+    public static void main(String[] args) {
+
+        ArrayList l = new ArrayList();
+
+        for(int i = 0; i <= 10; i++){
+            l.add(i);
+        }
+
+        System.out.println(l);
+
+        Iterator itr = l.iterator();
+
+        while(itr.hasNext()){
+            Integer I = (Integer) itr.next();
+
+            if(I % 2 == 0){
+                System.out.println(I);
+            }
+            else{
+                itr.remove();
+            }
+        }
+
+        System.out.println(l);
+    }
+}
+```
+Output :
+```output
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+0
+2
+4
+6
+8
+10
+[0, 2, 4, 6, 8, 10]
+```
+
+## Limitations of Iterator
+
+- By using Enumeration and Iterator, we can move only in the forward direction, and we cannot move in the backward direction.  
+Hence, they are single-direction cursors, not bi-directional cursors.
+- By using Iterator, we can perform only read and remove operations.  
+We cannot perform replacement or addition of new objects.
+- To overcome the above limitations, we should go for ListIterator.
+
+
+
