@@ -864,3 +864,30 @@ Output :
 | **Operations supported** | **Read only**                                       | **Read + Remove**                                        | **Read + Remove + Replace + Add**                                                                                    |
 | **How we can get it?**   | By using `elements()` method of **Vector class**    | By using `iterator()` method of **Collection interface** | By using `listIterator()` method of **List interface**                                                               |
 | **Methods**              | `hasMoreElements()`, `nextElement()`                | `hasNext()`, `next()`, `remove()`                        | `hasNext()`, `next()`, `nextIndex()`, `hasPrevious()`, `previous()`, `previousIndex()`, `remove()`, `add()`, `set()` |
+
+## Internal implementation of Cursors
+
+```java
+import java.util.*;
+
+class CursorsDemo {
+    public static void main(String[] args) {
+
+        Vector v = new Vector();
+
+        Enumeration e = v.elements();
+        Iterator itr = v.iterator();
+        ListIterator litr = v.listIterator();
+
+        System.out.println(e.getClass().getName());
+        System.out.println(itr.getClass().getName());
+        System.out.println(litr.getClass().getName());
+    }
+}
+```
+Output :
+```output
+java.util.Vector$1
+java.util.Vector$Itr
+java.util.Vector$ListItr
+```
