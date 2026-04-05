@@ -1057,3 +1057,57 @@ SortedSet elements:
 1. `tailSet(106)` → `[110, 115, 120]`
 1. `subSet(101, 115)` → `[101, 104, 105, 110]`
 1. `comparator()` → `null`
+
+# TreeSet
+
+- The underlying data structure is a Balanced Tree (Red-Black Tree). 
+- Duplicate objects are not allowed. 
+- Insertion order is not preserved.
+- Heterogeneous objects are not allowed; otherwise, we will get a runtime exception: `ClassCastException`.
+- Null insertion is possible only once (only in older Java versions; in modern Java versions it throws `NullPointerException`).
+- TreeSet implements `Serializable` and `Cloneable`, but not `RandomAccess`.
+- All objects are inserted based on some sorting order. It may be:
+  - Default natural sorting order, or
+  - Customized sorting order (using a Comparator).
+
+## Constructors
+
+1. `TreeSet t = new TreeSet();`  
+The elements will be inserted according to the default natural sorting order.
+3. `TreeSet t = new TreeSet(Comparator c);`  Creates an empty TreeSet where the elements will be inserted according to the customized sorting order specified by the Comparator object.
+4. `TreeSet t = new TreeSet(Collection c);`
+5. `TreeSet t = new TreeSet(SortedSet s);`
+
+Example :
+```java
+import java.util.*;
+
+class TreeSetDemo {
+    public static void main(String[] args) {
+
+        TreeSet t = new TreeSet();
+
+        t.add("A");
+        t.add("a");
+        t.add("B");
+        t.add("Z");
+        t.add("L");
+
+        System.out.println(t);
+    }
+}
+```
+Output:
+```output
+[A, B, L, Z, a]
+```
+
+## Null acceptence
+
+- For a non-empty TreeSet, if we try to insert `null`, then we will get a `NullPointerException`.
+- For an empty TreeSet, null was allowed as the first element (in older Java versions). But after inserting null, if we try to insert any other element, we will get a runtime exception: NullPointerException.
+
+> NOTE: 
+> - Up to Java 1.6, null was allowed as the first element in an empty TreeSet.null is not allowed
+> - From Java 1.7 onwards, null is not allowed even as the first element.
+> - Therefore, this behavior is not applicable to TreeSet from Java 1.7 onwards.
