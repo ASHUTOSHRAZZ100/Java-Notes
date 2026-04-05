@@ -1029,3 +1029,31 @@ false
 ```
 > **NOTE:** > in general we can use `linkedHashSet` to develop cache based application where dublicates are not allowed and insertion order preserved.
 
+# SortedSet (I)
+
+- SortedSet is the child interface of Set.
+- If we want to represent a group of individual objects according to some sorting order without duplicates, then we should use SortedSet.
+- The SortedSet interface defines the following specific methods:
+| Method                                        | Definition                                                                                                                                                        |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Object first();`                             | Returns the first element of the `SortedSet`.                                                                                                                     |
+| `Object last();`                              | Returns the last element of the `SortedSet`.                                                                                                                      |
+| `SortedSet headSet(Object obj);`              | Returns a `SortedSet` whose elements are **less than `obj`**.                                                                                                     |
+| `SortedSet tailSet(Object obj);`              | Returns a `SortedSet` whose elements are **greater than or equal to `obj`**.                                                                                      |
+| `SortedSet subSet(Object obj1, Object obj2);` | Returns a `SortedSet` whose elements are **greater than or equal to `obj1` and less than `obj2`**.                                                                |
+| `Comparator comparator();`                    | Returns the `Comparator` object that describes the underlying sorting technique. If we are using the **default natural sorting order**, then it returns **null**. |
+
+
+> **NOTE:** The default natural sorting order for numbers is ascending order, and for String objects it is alphabetical order.
+
+Example :
+
+SortedSet elements:  
+`[100,101,104,105,110,115,120]`
+
+1. `first()` → `100`
+1. `last()` → `120`
+1. `headSet(106)` → `[100, 101, 104, 105]`
+1. `tailSet(106)` → `[110, 115, 120]`
+1. `subSet(101, 115)` → `[101, 104, 105, 110]`
+1. `comparator()` → `null`
