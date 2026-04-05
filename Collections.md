@@ -634,7 +634,7 @@ There are three types of cursors available in Java:
 
 1. [Enumeration](#enumeration)
 2. [Iterator](#iterator)
-3. ListIterator
+3. [ListIterator](#listiterator-i)
 
 # Enumeration
 
@@ -891,3 +891,141 @@ java.util.Vector$1
 java.util.Vector$Itr
 java.util.Vector$ListItr
 ```
+
+# Set
+
+```diagram
+Set (I)
+   |
+   |-- HashSet
+   |      |
+   |      |-- LinkedHashSet
+   |
+   |-- SortedSet (I)
+           |
+           |-- NavigableSet (I)
+                   |
+                   |-- TreeSet
+```
+
+- Set is a child interface of the Collection interface.
+- If we want to represent a group of individual objects as a single entity where duplicates are not allowed and insertion order is not preserved, then we should go for the Set interface.
+-  The Set interface does not contain any new methods; we have to use only the methods of the Collection interface.
+
+# HashSet
+
+- The underlying data structure is a hash table.
+- Duplicate objects are not allowed.
+- Insertion order is not preserved; it is based on the hash code of the objects.
+- Null insertion is possible, but only once.
+- Heterogeneous objects are allowed.
+- `HashSet` implements the Serializable and Cloneable interfaces but not the RandomAccess interface.
+- HashSet is the best choice if our frequent operation is search.
+
+> **NOTE:** 
+> In HashSet, duplicates are not allowed.  
+> If we try to insert duplicate elements, we will not get any compile-time or runtime error.  
+> The `add()` method simply returns `false`.
+
+Example :
+```java
+import java.util.*;
+
+class HashSetDemo {
+    public static void main(String[] args) {
+
+        HashSet h = new HashSet();
+
+        System.out.println(h.add("A")); // true
+        System.out.println(h.add("A")); // false
+    }
+}
+```
+
+## Constructors 
+
+1. `HashSet h = new HashSet();`  
+Creates an empty HashSet object with the default initial capacity of 16 and default load factor (fill ratio) of 0.75.
+2. `HashSet h = new HashSet(int initialCapacity);`  
+Creates an empty HashSet object with the specified initial capacity and the default load factor of 0.75.
+3. `HashSet h = new HashSet(int initialCapacity, float loadFactor);`  
+Creates an empty HashSet object with the specified initial capacity and specified load factor.
+4. `HashSet h = new HashSet(Collection c);`  
+Creates an equivalent HashSet object for the given collection.  
+This constructor is mainly used for interconversion between collection objects.
+
+## Fill Ratio / Load Factor
+
+The load factor (fill ratio) determines after what level of filling the HashSet capacity should increase.
+
+For example:  
+- If the load factor is 0.75, it means that when 75% of the HashSet capacity is filled, a new HashSet object will be created (rehashing occurs).
+
+Example :
+```java
+import java.util.*;
+
+class HashSetDemo {
+    public static void main(String[] args) {
+
+        HashSet h = new HashSet();
+
+        h.add("B");
+        h.add("C");
+        h.add("D");
+        h.add("Z");
+        h.add(null);
+        h.add(10);
+
+        System.out.println(h.add("Z")); // false
+        System.out.println(h);
+    }
+}
+```
+Output :
+```output
+false
+[D, B, Z, C, 10, null]
+```
+> **Note:**
+> The insertion order is not preserved in HashSet, so the output order may change
+
+# LinkedHashSet
+
+- LinkedHashSet is a child class of `HashSet`.
+- It is almost the same as `HashSet` (including constructors and methods) except for the following differences.
+
+| **HashSet**                                       | **LinkedHashSet**                                                               |
+| ------------------------------------------------- | ------------------------------------------------------------------------------- |
+| The **underlying data structure is a HashTable**. | The **underlying data structure is a combination of LinkedList and HashTable**. |
+| **Insertion order is not preserved**.             | **Insertion order is preserved**.                                               |
+| Introduced in **Java 1.2**.                       | Introduced in **Java 1.4**.                                                     |
+
+
+```java
+import java.util.*;
+
+class HashSetDemo {
+    public static void main(String[] args) {
+
+        LinkedHashSet h = new LinkedHashSet();
+
+        h.add("B");
+        h.add("C");
+        h.add("D");
+        h.add("Z");
+        h.add(null);
+        h.add(10);
+
+        System.out.println(h.add("Z")); // false
+        System.out.println(h);
+    }
+}
+```
+Output
+```output
+false
+[B, C, D, Z, null, 10]
+```
+> **NOTE:** > in general we can use `linkedHashSet` to develop cache based application where dublicates are not allowed and insertion order preserved.
+
