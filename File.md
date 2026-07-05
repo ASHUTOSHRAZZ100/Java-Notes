@@ -251,7 +251,7 @@ while (i != -1) {
     i = fr.read();
 }
 ```
-2. **int read(char[] ch) **  
+2. **int read(char[] ch)**  
 It attempts to read characters from the file into a character array and returns the number of characters copied from the file.
 
 Example :
